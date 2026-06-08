@@ -9,21 +9,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
+        /* Definición de la nueva paleta y sombras */
         :root {
-            --primary-blue: #0a2f5a;
-            --footer-red: #8e3e35;
-            --bg-color: #fdfbf7;
-            --card-bg: #ffffff;
-            --text-shadow-color: rgba(255, 20, 147, 0.9);
-            --soft-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            --primary-blue: #0a2f5a; /* Azul Marino Profundo (Encabezado) */
+            --footer-red: #8e3e35;  /* Rojo Terracota/Óxido (Pie de Página) */
+            --bg-color: #fdfbf7;     /* Blanco Roto muy suave (Fondo General) */
+            --card-bg: #ffffff;     /* Blanco Puro (Tarjetas) */
+            --text-shadow-color: rgba(255, 20, 147, 0.9); /* Fucsia Neón (H1 Sombra) */
+            --soft-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* Sombra suave para tarjetas */
         }
 
+        /* Estilos Generales */
         html, body {
             height: 100%;
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: #444;
+            background-color: var(--bg-color); /* Usamos el color de fondo definido */
+            color: #444; /* Color de texto base */
         }
         
         body {
@@ -32,6 +34,7 @@
             text-align: center;
         }
 
+        /* Encabezado */
         header {
             padding: 30px 20px;
             background-color: var(--primary-blue);
@@ -39,6 +42,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
+        /* Sombra Fucsia Neón en el H1 */
         header h1 {
             font-weight: bold;
             margin: 0;
@@ -46,6 +50,7 @@
                         0 0 20px var(--text-shadow-color);
         }
 
+        /* Contenedor Principal */
         main {
             flex: 1;
             padding: 40px 20px;
@@ -60,50 +65,57 @@
             font-weight: bold;
         }
 
+        /* El Reto: Clase .semana y Efecto de Giro (Flashcards Interactivas) */
         
+        /* Contenedor de la flashcard que da la perspectiva 3D */
         .flashcard-container {
-            perspective: 1000px;
+            perspective: 1000px; /* Esencial para el efecto 3D */
             margin-bottom: 30px;
             width: 100%;
-            height: 250px;
+            height: 250px; /* Altura estándar */
             cursor: pointer;
         }
 
-        .flashcard-container.pdf-card {
+        /* Modificador para tarjetas que contienen multimedia (PDF/Video) para mejorar la visibilidad */
+        .flashcard-container.media-card {
             height: 500px; 
         }
 
+        /* La tarjeta en sí que gira */
         .flashcard {
             width: 100%;
             height: 100%;
             transition: transform 0.6s ease;
-            transform-style: preserve-3d;
+            transform-style: preserve-3d; /* Permite que los hijos se muevan en 3D */
             position: relative;
         }
 
+        /* Gira la tarjeta 180 grados al pasar el mouse */
         .flashcard-container:hover .flashcard {
             transform: rotateY(180deg);
         }
 
+        /* Estilo común para la cara delantera y trasera */
         .flashcard-front, .flashcard-back {
             position: absolute;
             width: 100%;
             height: 100%;
-            backface-visibility: hidden;
+            backface-visibility: hidden; /* Oculta la cara trasera cuando no está de frente */
             background-color: var(--card-bg);
             border-radius: 12px;
             padding: 25px;
             box-shadow: var(--soft-shadow);
             text-align: left;
-            border-left: 6px solid var(--primary-blue);
+            border-left: 6px solid var(--primary-blue); /* Detalle azul del lado izquierdo */
             display: flex;
             flex-direction: column;
         }
 
+        /* Cara trasera: Inicialmente girada 180 grados */
         .flashcard-back {
             transform: rotateY(180deg);
-            background-color: #fefefe;
-            border-left: 6px solid var(--footer-red);
+            background-color: #fefefe; /* Un blanco imperceptiblemente diferente */
+            border-left: 6px solid var(--footer-red); /* Detalle rojo del lado izquierdo */
             color: #555;
         }
 
@@ -113,18 +125,22 @@
             font-weight: bold;
         }
 
+        /* Títulos de la parte trasera con el color azul marino */
         .flashcard-back h4 {
             color: var(--primary-blue);
         }
 
-        .pdf-frame {
+        /* Estilos específicos para iframes y videos */
+        .media-frame {
             width: 100%;
-            flex-grow: 1;
+            flex-grow: 1; /* Toma el espacio restante de la tarjeta */
             border: 2px solid #eee;
             border-radius: 8px;
             margin-top: 10px;
+            background-color: #000; /* Fondo negro por si el video no cubre todo */
         }
 
+        /* Pie de Página */
         footer {
             display: flex;
             justify-content: space-between;
@@ -138,16 +154,18 @@
             z-index: 10;
         }
 
+        /* Efecto Zoom en el Logo (Ajustado) */
         footer img {
             transition: transform 0.4s ease, filter 0.3s ease;
             cursor: pointer;
         }
 
         footer img:hover {
-            transform: scale(1.1);
-            filter: brightness(1.1);
+            transform: scale(1.1); /* Agranda la imagen un 10% */
+            filter: brightness(1.1); /* Aumenta ligeramente el brillo */
         }
 
+        /* Diseño Responsivo para celulares */
         @media (max-width: 600px) {
             footer {
                 flex-direction: column;
@@ -157,8 +175,8 @@
             .flashcard-container {
                 height: 350px; 
             }
-            .flashcard-container.pdf-card {
-                height: 450px;
+            .flashcard-container.media-card {
+                height: 450px; /* Ajuste para pantallas pequeñas en recursos multimedia */
             }
         }
     </style>
@@ -172,7 +190,8 @@
     <main>
         <h3>Contenido de la página WEB</h3>
 
-        <div class="flashcard-container semana pdf-card">
+        <!-- Semana 1: Modificada para el PDF de Arduino -->
+        <div class="flashcard-container semana media-card">
             <div class="flashcard">
                 <div class="flashcard-front">
                     <h4>Semana 1: Introducción a Arduino</h4>
@@ -182,21 +201,27 @@
                 </div>
                 <div class="flashcard-back">
                     <h4>Documento de Trabajo</h4>
-                    <iframe class="pdf-frame" src="Recursos/Introducción Arduino (2ab).pdf" title="PDF Arduino"></iframe>
+                    <iframe class="media-frame" src="Introducción Arduino (2ab).pdf" title="PDF Arduino" style="background-color: white;"></iframe>
                 </div>
             </div>
         </div>
 
-        <div class="flashcard-container semana">
+        <!-- Semana 2: Modificada para el Video de LEDs -->
+        <div class="flashcard-container semana media-card">
             <div class="flashcard">
                 <div class="flashcard-front">
-                    <h4>Semana 2: Introducción a CSS</h4>
-                    <p>Descubrimos el poder de los estilos en cascada. Aprendimos a aplicar colores, fuentes y a dar forma a nuestra página utilizando selectores y propiedades básicas...</p>
-                    <p class="text-muted"><small>Pasa el mouse para ver más detalles</small></p>
+                    <h4>Semana 2: Práctica con LEDs</h4>
+                    <p>Durante esta semana pusimos en práctica nuestros conocimientos en electrónica básica controlando el encendido y apagado de LEDs mediante código.</p>
+                    <p>Exploramos las conexiones en la protoboard y la configuración de pines digitales en nuestra placa.</p>
+                    <p class="text-muted mt-auto"><small>Pasa el mouse para reproducir el video de la práctica</small></p>
                 </div>
                 <div class="flashcard-back">
-                    <h4>Semana 2: Detalles Completos</h4>
-                    <p>Vimos cómo vincular nuestra hoja de estilos externa, el uso de selectores (clases e IDs), y propiedades fundamentales de formato. Empezamos a jugar con colores y tipografía para mejorar la estética visual...</p>
+                    <h4>Video de la Práctica</h4>
+                    <!-- Aquí se incrusta el video con controles -->
+                    <video class="media-frame" controls>
+                        <source src="Recursos/LEDS Dubón 11C.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de este video.
+                    </video>
                 </div>
             </div>
         </div>
